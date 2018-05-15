@@ -9,6 +9,17 @@
 #define MEM32(addr)		*(volatile unsigned long*)(addr)
 #define MEM8(addr)		*(volatile unsigned char*)(addr)
 
+uint32_t tTaskEnterCritical(void)
+{
+	uint32_t primask = __get_PRIMASK();
+	__disable_irq();
+	return primask;
+}
+void tTaskExitCritical(uint32_t status)
+{
+	__set_PRIMASK(status);
+}
+
 __asm void PendSV_Handler(void)
 {
 	
