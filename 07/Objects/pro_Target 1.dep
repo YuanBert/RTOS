@@ -1,6 +1,6 @@
 Dependencies for Project 'pro', Target 'Target 1': (DO NOT MODIFY !)
-F (.\src\main.c)(0x5AFAACD1)(--c99 --gnu -c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="525" -D_RTE_ -DARMCM3-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
-I (src\tinyOS.h)(0x5AFAAB61)
+F (.\src\main.c)(0x5AFBCEDD)(--c99 --gnu -c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="525" -D_RTE_ -DARMCM3-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (src\tinyOS.h)(0x5AFBCEE2)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\Device\ARM\ARMCM3\Include\ARMCM3.h)(0x5A8E1FE2)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm3.h)(0x5A8E1FE2)
@@ -9,9 +9,9 @@ I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_compiler.h)(0x5A8E1FE
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_armcc.h)(0x5A8E1FE2)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\mpu_armv7.h)(0x5A8E1FE2)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\Device\ARM\ARMCM3\Include\system_ARMCM3.h)(0x5A8E1FE2)
-F (.\src\tinyOS.h)(0x5AFAAB61)()
+F (.\src\tinyOS.h)(0x5AFBCEE2)()
 F (.\src\switch.c)(0x5AFAAB52)(--c99 --gnu -c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\Device\ARM\ARMCM3\Include-D__UVISION_VERSION="525" -D_RTE_ -DARMCM3-o .\objects\switch.o --omf_browse .\objects\switch.crf --depend .\objects\switch.d)
-I (src\tinyOS.h)(0x5AFAAB61)
+I (src\tinyOS.h)(0x5AFBCEE2)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\Device\ARM\ARMCM3\Include\ARMCM3.h)(0x5A8E1FE2)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm3.h)(0x5A8E1FE2)

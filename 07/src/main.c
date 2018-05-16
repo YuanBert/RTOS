@@ -6,6 +6,41 @@ tTask *  nextTask;
 tTask *  idleTask;
 tTask *  taskTable[2];
 
+uint8_t schedLockCounter;
+
+void tTaskSchedInit(void)
+{
+	schedLockCounter = 0;
+}
+
+void tTaskSchedDissable(void)
+{
+	uint32_t status = tTaskEnterCritical();
+	
+	if(schedLockCounter < 255)
+	{
+		schedLockCounter++;
+	}
+	tTaskExitCritical(status);
+}
+
+void tTaskSchedEnable(void)
+{
+	uint32_t status = tTaskEnterCritical();
+	
+	if(schedLockCounter > 0)
+	{
+		if(--schedLockCounter == 0)
+		{
+			tTaskSched();
+		}
+	}
+	tTaskExitCritical(status);
+}
+
+
+
+int  shareCount;
 uint32_t  tickCount;
 
 
@@ -14,6 +49,11 @@ void tTaskSched()
 {
 	uint32_t primask;
 	primask = tTaskEnterCritical();
+	if(schedLockCounter > 0)
+	{
+		tTaskExitCritical(primask);
+		return ;
+	}
 	if(currentTask == idleTask)
 	{
 		if(0 == taskTable[0]->delayTicks)
@@ -151,6 +191,14 @@ void task1Entry(void *param)
 	tSetSysTickPeriod(10);
 	while(1)
 	{
+		int var;
+		tTaskSchedDissable();
+		var = shareCount;
+		taskDelay(1);
+		var++;
+		shareCount = var;
+		tTaskSchedEnable();
+		
 		task1flag = 1;
 		taskDelay(1);
 		task1flag = 0;
@@ -160,15 +208,12 @@ void task1Entry(void *param)
 int task2flag;
 void task2Entry(void *param)
 {
-	uint32_t primask;
 	while(1)
 	{
-		uint32_t i;
-		uint32_t counter = tickCount;
-		primask = tTaskEnterCritical();
-		for(i = 0; i< 0xFFFF;i++){}
-		tickCount = counter + 1;
-		tTaskExitCritical(primask);
+		tTaskSchedDissable();
+		shareCount++;
+		tTaskSchedEnable();
+		
 		task2flag = 1;
 		taskDelay(1);
 		task2flag = 0;
@@ -205,6 +250,7 @@ int main()
 	idleTask = &tTaskIdle;
 	
 	nextTask = taskTable[0];
+	tTaskSchedInit();
 	
 	tTaskRunFirst();
 	

@@ -20,7 +20,11 @@ extern tTask *nextTask;
 
 void  tTaskSwitch(void);
 void  tTaskRunFirst(void);
+
 uint32_t tTaskEnterCritical(void);
 void tTaskExitCritical(uint32_t status);
-
+void tTaskSchedInit(void);
+void tTaskSchedDissable(void);
+void tTaskSchedEnable(void);
+void tTaskSched(void);
 #endif
