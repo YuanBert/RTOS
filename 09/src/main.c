@@ -49,6 +49,27 @@ tTask * tTaskHighestReady(void)
 }
 
 
+void tTaskSystemTickHandler()
+{
+	int i;
+	for(i = 0; i< TINGOS_PRO_COUNT;i++)
+	{
+		/*此处可以添加对任务表的检测*/
+		if(NULL == taskTable[i])
+		{
+			continue;
+		}
+		if(taskTable[i]->delayTicks > 0)
+		{
+			taskTable[i]->delayTicks--;
+		}
+		else
+		{
+			tBitmapSet(&taskPrioBitmap,i);
+		}
+	}    
+}
+
 int  shareCount;
 uint32_t  tickCount;
 
@@ -90,23 +111,7 @@ void SysTick_Handler()
 {
 	uint32_t primask;
 	primask = tTaskEnterCritical();
-	int i;
-	for(i = 0; i< TINGOS_PRO_COUNT;i++)
-	{
-		/*此处可以添加对任务表的检测*/
-		if(NULL == taskTable[i])
-		{
-			continue;
-		}
-		if(taskTable[i]->delayTicks > 0)
-		{
-			taskTable[i]->delayTicks--;
-		}
-		else
-		{
-			tBitmapSet(&taskPrioBitmap,i);
-		}
-	}
+    tTaskSystemTickHandler();
 	tickCount++;
 	tTaskSched();
 	tTaskExitCritical(primask);
@@ -168,9 +173,23 @@ void tTaskInit(tTask* task,void (*entry)(void*),void *param, uint32_t prio,tTask
 
 int task1flag;
 int firstSet;
+tList list;
+tNode node[8];
 void task1Entry(void *param)
 {
+    int i = 0;
 	tSetSysTickPeriod(10);
+    tListInit(&list);
+    for(i = 0; i < 8; i++)
+    {
+        tNodeInit(&node[i]);
+        tListAddFirst(&list, &node[i]);
+    }
+    
+    for(i = 0; i < 8; i++)
+    {
+       tListRemoveFirst(&list); 
+    }
 	while(1)
 	{	
 		task1flag = 1;
